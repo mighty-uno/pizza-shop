@@ -1,16 +1,26 @@
-const { Category } = require("../../../models");
+const { Choices } = require("../../../models");
 
 async function add(req) {
-  const category = new Category(req);
-  const result = await category.save();
+  const choice = new Choices(req);
+  const result = await choice.save();
   return result;
 }
 
-async function get(req) {}
+async function get(req) {
+  return await Choices.find().sort({ name: 1 }).exec();
+}
 
-async function update(req) {}
+async function update(body, params) {
+  var choice = await Choices.findById(params.id).exec();
+  choice.set(body);
+  var result = await choice.save();
+  return result;
+}
 
-async function remove(req) {}
+async function remove(req) {
+  var result = await Choices.deleteOne({ _id: params.id }).exec();
+  return result;
+}
 
 module.exports = {
   add,

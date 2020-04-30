@@ -1,16 +1,30 @@
-const { Category } = require("../../../models");
+const { Items } = require("../../../models");
 
 async function add(req) {
-  const category = new Category(req);
-  const result = await category.save();
+  const item = new Items(req);
+  const result = await item.save();
   return result;
 }
 
-async function get(req) {}
+async function get(req) {
+  return await Items.find()
+    .populate({ path: "category", select: "name" })
+    .populate({ path: "choices", select: "name" })
+    .sort({ name: 1 })
+    .exec();
+}
 
-async function update(req) {}
+async function update(body, params) {
+  var item = await Items.findById(params.id).exec();
+  item.set(body);
+  var result = await item.save();
+  return result;
+}
 
-async function remove(req) {}
+async function remove(params) {
+  var result = await Items.deleteOne({ _id: params.id }).exec();
+  return result;
+}
 
 module.exports = {
   add,

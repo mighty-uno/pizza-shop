@@ -16,10 +16,12 @@ const Items = new Schema(
     price: { type: Number, default: 0 },
     discount: { type: Number, default: 0 },
     qty: { type: Numberm, default: 0 },
-    choices: {
-      type: ObjectId,
-      ref: "choices",
-    },
+    choices: [
+      {
+        type: ObjectId,
+        ref: "choices",
+      },
+    ],
   },
   { timestamps: true }
 );
