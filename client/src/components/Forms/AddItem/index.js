@@ -99,6 +99,9 @@ export const AddItem = (props) => {
         >
           <Input placeholder="enter item price"></Input>
         </Form.Item>
+        <Form.Item name="image">
+          <Input placeholder="image path"></Input>
+        </Form.Item>
         <Form.Item>
           <Button
             loading={isLoading}
