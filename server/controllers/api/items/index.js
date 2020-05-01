@@ -9,7 +9,7 @@ async function add(req) {
 async function get(req = {}) {
   return await Items.find({ isActive: true, ...req })
     .populate({ path: "category", select: "name" })
-    .populate({ path: "choices", select: "name" })
+    .populate({ path: "choices", select: "name price" })
     .sort({ name: 1 })
     .exec();
 }

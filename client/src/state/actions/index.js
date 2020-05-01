@@ -10,6 +10,7 @@ import {
   DELETE_CHOICE,
   ADD_ITEM_CART,
   UPDATE_ITEM_CART,
+  UPDATE_CHOICE_ITEM_CART,
 } from "./types";
 
 export const fetchCategories = (req) => async (dispatch) => {
@@ -234,6 +235,15 @@ export const addToCart = (req) => async (dispatch) => {
 export const updateToCart = (req) => async (dispatch) => {
   dispatch({
     type: UPDATE_ITEM_CART,
+    payload: req,
+  });
+
+  return true;
+};
+
+export const addChoiceToCart = (req) => async (dispatch) => {
+  dispatch({
+    type: UPDATE_CHOICE_ITEM_CART,
     payload: req,
   });
 

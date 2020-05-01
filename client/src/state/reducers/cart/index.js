@@ -1,4 +1,8 @@
-import { ADD_ITEM_CART, UPDATE_ITEM_CART } from "../../actions/types";
+import {
+  ADD_ITEM_CART,
+  UPDATE_ITEM_CART,
+  UPDATE_CHOICE_ITEM_CART,
+} from "../../actions/types";
 
 export default function (state = [], action) {
   let item = action.payload;
@@ -23,6 +27,15 @@ export default function (state = [], action) {
         sCopy.splice(fIndex, 1);
       } else if (fIndex > -1 && sCopy[fIndex]["qty"] > 0) {
         sCopy[fIndex]["qty"]--;
+      }
+      state = sCopy;
+      return state;
+
+    case UPDATE_CHOICE_ITEM_CART:
+      debugger;
+      fIndex = sCopy.findIndex((r) => r._id == item.item._id);
+      if (fIndex > -1) {
+        sCopy[fIndex]["addedChoices"] = item.selectedChoice;
       }
       state = sCopy;
       return state;

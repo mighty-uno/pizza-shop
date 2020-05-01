@@ -115,7 +115,12 @@ const Home = (props) => {
       </Layout>
       <div className="cartConter">
         {console.log(cart)}
-        <Badge count={cart.length}>
+        <Badge
+          count={cart.length}
+          onClick={() => {
+            props.history.push("/cart");
+          }}
+        >
           <Icon component={ShoppingCartOutlined} className="badgeHead"></Icon>
         </Badge>
       </div>
