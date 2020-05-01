@@ -1,21 +1,31 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Form, Input, Button } from "antd";
+import { addChoice } from "../../../state/actions";
 export const AddChoice = (props) => {
-  const onFinish = (values) => {};
+  const [isLoading, setIsLoading] = useState(false);
+  const { addChoice } = props;
+
+  const onFinish = async (values) => {
+    setIsLoading(true);
+
+    await addChoice(values);
+
+    setIsLoading(false);
+  };
   return (
     <div>
-      <Form onFinish>
+      <Form onFinish={onFinish}>
         <Form.Item
           name="name"
           rules={[
             {
               required: true,
-              message: "enter category name",
+              message: "enter choice name",
             },
           ]}
         >
-          <Input placeholder="enter category name"></Input>
+          <Input placeholder="enter choice name"></Input>
         </Form.Item>
         <Form.Item
           name="description"
@@ -39,7 +49,13 @@ export const AddChoice = (props) => {
           <Input placeholder="enter choices price"></Input>
         </Form.Item>
         <Form.Item>
-          <Button block type="primery">
+          <Button
+            htmlType="submit"
+            loading={isLoading}
+            disabled={isLoading}
+            block
+            type="primary"
+          >
             Add
           </Button>
         </Form.Item>
@@ -50,6 +66,8 @@ export const AddChoice = (props) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  addChoice,
+};
 
-export default connect(null, null)(AddChoice);
+export default connect(null, mapDispatchToProps)(AddChoice);

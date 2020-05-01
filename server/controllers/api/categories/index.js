@@ -17,7 +17,7 @@ async function update(body, params) {
   return result;
 }
 
-async function remove(req) {
+async function remove(params) {
   var result = await Category.deleteOne({ _id: params.id }).exec();
   return result;
 }

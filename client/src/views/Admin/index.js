@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { connect } from "react-redux";
-import { Layout, Menu, Button, Modal, Table } from "antd";
+import { Layout, Menu, Button, Modal, Table, Popconfirm } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import { CategoryForm, ItemForm, ChoiceForm } from "../../components";
+import {
+  fetchCategories,
+  fetchItems,
+  fetchChoices,
+  deleteCategory,
+  deleteChoice,
+  deleteItem,
+} from "../../state/actions";
+
 const { Header, Content, Footer } = Layout;
 const menus = [
   {
@@ -66,8 +75,42 @@ const menus = [
   },
 ];
 const Admin = (props) => {
-  const [menu, setMenu] = useState(menus[0]["id"]);
   const [openedForm, setOpenedForm] = useState(false);
+  const {
+    fetchCategories,
+    fetchItems,
+    fetchChoices,
+    deleteCategory,
+    deleteChoice,
+    deleteItem,
+  } = props;
+
+  const handleDelete = (id, type) => {
+    switch (type) {
+      case "categories":
+        deleteCategory(id);
+        break;
+      case "items":
+        deleteItem(id);
+        break;
+      case "choices":
+        deleteChoice(id);
+        break;
+    }
+  };
+  const handleEdit = (req) => {};
+
+  const [menu, setMenu] = useState(menus[0]["id"]);
+
+  const loadSettings = async (req) => {
+    fetchCategories();
+    fetchItems();
+    fetchChoices();
+  };
+
+  useEffect(() => {
+    loadSettings();
+  }, []);
 
   const getForm = (req) => {
     switch (req) {
@@ -81,7 +124,26 @@ const Admin = (props) => {
   };
 
   const getColumns = (req) => {
-    return menus.find((r) => r.id == req)["tableView"];
+    return [
+      ...menus.find((r) => r.id == req)["tableView"],
+      {
+        title: "operation",
+        dataIndex: "operation",
+        render: (text, record) => (
+          <>
+            <Button type="link" onClick={handleEdit(record.key)}>
+              Edit
+            </Button>
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => handleDelete(record._id, menu)}
+            >
+              <Button type="link">Delete</Button>
+            </Popconfirm>
+          </>
+        ),
+      },
+    ];
   };
   return (
     <Layout>
@@ -135,6 +197,13 @@ const mapStateToProps = (state) => ({
   choices: state.choices,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  fetchCategories,
+  fetchChoices,
+  fetchItems,
+  deleteCategory,
+  deleteChoice,
+  deleteItem,
+};
 
-export default connect(mapStateToProps, null)(Admin);
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

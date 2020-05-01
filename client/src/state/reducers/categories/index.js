@@ -7,7 +7,7 @@ import {
 export default function (state = [], action) {
   switch (action.type) {
     case ADD_CATEGORY:
-      return [...state, action.payload];
+      return [...state, ...action.payload];
 
     case UPDATE_CATEGORY:
       state = state.filter((r) => r._id != action.payload._id);
