@@ -2,6 +2,7 @@ import {
   ADD_ITEM_CART,
   UPDATE_ITEM_CART,
   UPDATE_CHOICE_ITEM_CART,
+  CLEAR_CART,
 } from "../../actions/types";
 
 export default function (state = [], action) {
@@ -32,13 +33,15 @@ export default function (state = [], action) {
       return state;
 
     case UPDATE_CHOICE_ITEM_CART:
-      debugger;
       fIndex = sCopy.findIndex((r) => r._id == item.item._id);
       if (fIndex > -1) {
         sCopy[fIndex]["addedChoices"] = item.selectedChoice;
       }
       state = sCopy;
       return state;
+
+    case CLEAR_CART:
+      return [];
     default:
       return state;
   }
