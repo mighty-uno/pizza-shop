@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Layout, Menu } from "antd";
-import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import { Row, Col, Card, Layout, Menu, Badge } from "antd";
+import Icon from "@ant-design/icons";
+import {
+  PlusCircleOutlined,
+  MinusCircleOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import {
   fetchCategories,
   fetchItems,
@@ -9,17 +14,20 @@ import {
   deleteCategory,
   deleteChoice,
   deleteItem,
+  updateToCart,
+  addToCart,
 } from "../../state/actions";
+import "./index.scss";
 const { Meta } = Card;
 const { Header, Content, Footer, Sider } = Layout;
 const Home = (props) => {
   const {
+    cart,
     fetchCategories,
     fetchItems,
     fetchChoices,
-    deleteCategory,
-    deleteChoice,
-    deleteItem,
+    updateToCart,
+    addToCart,
   } = props;
 
   const [category, setCategory] = useState("");
@@ -74,8 +82,16 @@ const Home = (props) => {
                       hoverable
                       cover={<img alt="item pic" src={item.image} />}
                       actions={[
-                        <MinusCircleOutlined></MinusCircleOutlined>,
-                        <PlusCircleOutlined />,
+                        <MinusCircleOutlined
+                          onClick={() => {
+                            updateToCart(item);
+                          }}
+                        ></MinusCircleOutlined>,
+                        <PlusCircleOutlined
+                          onClick={() => {
+                            addToCart(item);
+                          }}
+                        />,
                       ]}
                     >
                       <Meta title={item.name} description={item.description} />
@@ -85,14 +101,22 @@ const Home = (props) => {
             </Row>
           </div>
         </Content>
+
         <Footer style={{ textAlign: "center" }}>Pizza Shop @2020</Footer>
       </Layout>
+      <div className="cartConter">
+        {console.log(cart)}
+        <Badge count={cart.length}>
+          <Icon component={ShoppingCartOutlined} className="badgeHead"></Icon>
+        </Badge>
+      </div>
     </Layout>
   );
 };
 
 const mapStateToProps = (state) => ({
   categories: state.categories,
+  cart: state.cart,
   items: state.items,
   choices: state.choices,
 });
@@ -104,6 +128,8 @@ const mapDispatchToProps = {
   deleteCategory,
   deleteChoice,
   deleteItem,
+  updateToCart,
+  addToCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
