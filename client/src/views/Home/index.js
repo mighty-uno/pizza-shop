@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Layout, Menu, Badge } from "antd";
+import { Row, Col, Card, Layout, Menu, Badge, Button } from "antd";
 import Icon from "@ant-design/icons";
 import {
   PlusCircleOutlined,
@@ -48,16 +48,31 @@ const Home = (props) => {
     <Layout>
       <Layout className="site-layout">
         <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-          <Menu
-            theme="dark"
-            onSelect={(v) => setCategory(v.key)}
-            mode="horizontal"
-            defaultSelectedKeys={category}
-          >
-            {props.categories.map((category) => (
-              <Menu.Item key={category._id}>{category.name}</Menu.Item>
-            ))}
-          </Menu>
+          <Row gutter={8} style={{ width: "100%" }}>
+            <Col span={20}>
+              <Menu
+                theme="dark"
+                onSelect={(v) => setCategory(v.key)}
+                mode="horizontal"
+                defaultSelectedKeys={category}
+              >
+                {props.categories.map((category) => (
+                  <Menu.Item key={category._id}>{category.name}</Menu.Item>
+                ))}
+              </Menu>
+            </Col>
+            <Col span={4}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  props.history.push("/admin");
+                }}
+              >
+                {" "}
+                Admin{" "}
+              </Button>
+            </Col>
+          </Row>
         </Header>
         <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
           <div className="site-layout-background" style={{ marginTop: 64 }}>
