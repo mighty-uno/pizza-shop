@@ -227,6 +227,8 @@ export const addToCart = (req) => async (dispatch) => {
     type: ADD_ITEM_CART,
     payload: req,
   });
+
+  return true;
 };
 
 export const updateToCart = (req) => async (dispatch) => {
@@ -234,4 +236,6 @@ export const updateToCart = (req) => async (dispatch) => {
     type: UPDATE_ITEM_CART,
     payload: req,
   });
+
+  return true;
 };

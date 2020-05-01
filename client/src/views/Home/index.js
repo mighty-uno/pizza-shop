@@ -36,19 +36,13 @@ const Home = (props) => {
     await Promise.all([fetchCategories(), fetchItems(), fetchChoices()]);
   };
 
-  // const updateCategoryValue = (req) => {
-  //   if (props.categories.length) {
-  //     setCategory(props.categories[0]["_id"]);
-  //   }
-  // };
-
   useEffect(() => {
     loadSettings();
   }, []);
 
-  // useEffect(() => {
-  //   updateCategoryValue();
-  // }, [props.categories]);
+  useEffect(() => {
+    console.log("chanig");
+  }, [props.cart.length]);
 
   return (
     <Layout>
