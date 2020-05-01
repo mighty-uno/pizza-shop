@@ -9,8 +9,8 @@ export const AddChoice = (props) => {
   const onFinish = async (values) => {
     setIsLoading(true);
 
-    await addChoice(values);
-    form.resetFields();
+    let result = await addChoice(values);
+    if (result) form.resetFields();
     setIsLoading(false);
   };
   return (

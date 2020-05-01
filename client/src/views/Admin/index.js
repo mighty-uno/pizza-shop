@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { connect } from "react-redux";
 import { Layout, Menu, Button, Modal, Table, Popconfirm } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { CategoryForm, ItemForm, ChoiceForm } from "../../components";
 import {
   fetchCategories,
@@ -183,7 +183,7 @@ const Admin = (props) => {
           onClick={() => {
             setOpenedForm(!openedForm);
           }}
-          icon={<DownloadOutlined />}
+          icon={<PlusCircleOutlined />}
         />
       </Content>
       <Footer style={{ textAlign: "center" }}>Pizza Shop @2020</Footer>

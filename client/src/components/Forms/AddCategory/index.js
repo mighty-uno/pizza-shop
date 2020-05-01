@@ -9,9 +9,9 @@ export const AddCategory = (props) => {
 
   const onFinish = async (values) => {
     setIsLoading(true);
-    await addCategory(values);
+    let result = await addCategory(values);
     setIsLoading(false);
-    form.resetFields();
+    if (result) form.resetFields();
   };
 
   return (

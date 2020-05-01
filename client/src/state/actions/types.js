@@ -14,5 +14,3 @@ export const ADD_ITEM_CART = "ADD_ITEM_CART";
 export const UPDATE_ITEM_CART = "UPDATE_ITEM_CART";
 export const UPDATE_CHOICE_ITEM_CART = "UPDATE_CHOICE_ITEM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-
-// TskqsTya4CqccksV

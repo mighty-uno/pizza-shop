@@ -48,9 +48,17 @@ export const addCategory = (req) => async (dispatch) => {
         type: ADD_CATEGORY,
         payload: [payload.data],
       });
+      notification.error({
+        message: "Success",
+        description: "Done",
+      });
     }
     return true;
   } catch (e) {
+    notification.error({
+      message: "Error",
+      description: "Failed",
+    });
     return false;
   }
 };
@@ -174,9 +182,17 @@ export const addItem = (req) => async (dispatch) => {
         type: ADD_ITEM,
         payload: [payload.data],
       });
+      notification.error({
+        message: "Success",
+        description: "Done",
+      });
     }
     return true;
   } catch (e) {
+    notification.error({
+      message: "Error",
+      description: "Failed",
+    });
     return false;
   }
 };
@@ -205,7 +221,7 @@ export const fetchChoices = (req) => async (dispatch) => {
 export const addChoice = (req) => async (dispatch) => {
   try {
     const payload = await axios.post("api/choice", req);
-
+    debugger;
     if (payload.data.error) {
       notification.error({
         message: "Error",
@@ -216,9 +232,18 @@ export const addChoice = (req) => async (dispatch) => {
         type: ADD_CHOICE,
         payload: [payload.data],
       });
+
+      notification.error({
+        message: "Success",
+        description: "Done",
+      });
     }
     return true;
   } catch (e) {
+    notification.error({
+      message: "Error",
+      description: e.message,
+    });
     return false;
   }
 };

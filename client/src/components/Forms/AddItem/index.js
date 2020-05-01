@@ -9,8 +9,8 @@ export const AddItem = (props) => {
 
   const onFinish = async (values) => {
     setIsLoading(true);
-    await addItem(values);
-    form.resetFields();
+    let result = await addItem(values);
+    if (result) form.resetFields();
 
     setIsLoading(false);
   };
