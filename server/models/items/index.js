@@ -4,18 +4,19 @@ const ObjectId = mongoose.Types.ObjectId;
 const Items = new Schema(
   {
     name: { type: String, required: true },
+    description: { type: String, default: "" },
     category: {
       ref: "categories",
       type: ObjectId,
     },
-    image: { type: String, required: true },
+    image: { type: String },
     isActive: {
       type: Boolean,
       default: true,
     },
     price: { type: Number, default: 0 },
     discount: { type: Number, default: 0 },
-    qty: { type: Numberm, default: 0 },
+    qty: { type: Number, default: 0 },
     choices: [
       {
         type: ObjectId,

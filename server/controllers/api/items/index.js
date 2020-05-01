@@ -6,8 +6,8 @@ async function add(req) {
   return result;
 }
 
-async function get(req) {
-  return await Items.find()
+async function get(req = {}) {
+  return await Items.find({ isActive: true, ...req })
     .populate({ path: "category", select: "name" })
     .populate({ path: "choices", select: "name" })
     .sort({ name: 1 })

@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const { MONGODB, PORT } = require("./app/config/keys");
+const { MONGODB, PORT } = require("./configs");
 
 mongoose
   .connect(MONGODB.uri, MONGODB.options)
@@ -15,7 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 
 /*************ROUTES**************/
-require("./app/routes")(app);
+require("./routes")(app);
 
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
