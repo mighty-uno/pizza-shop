@@ -3,7 +3,8 @@ module.exports = {
   PORT: 5001,
 
   MONGODB: {
-    uri: "mongodb://localhost:27017/pizza",
+    uri:
+      "mongodb+srv://pizzaBoy:TskqsTya4CqccksV@cluster0-jbgar.mongodb.net/test?retryWrites=true&w=majority",
     options: {
       useNewUrlParser: true,
       useCreateIndex: true,

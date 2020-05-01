@@ -1,0 +1,19 @@
+{
+  "name": "pizza-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "sh ./build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArwanHimanshu/pizza-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArwanHimanshu/pizza-shop/issues"
+  },
+  "homepage": "https://github.com/ArwanHimanshu/pizza-shop#readme"
+}
