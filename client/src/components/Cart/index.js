@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   PageHeader,
   List,
@@ -19,7 +19,7 @@ import {
 import "./index.scss";
 import AddChoice from "./AddChoice";
 import { connect } from "react-redux";
-import { addChoiceToCart } from "../../state/actions";
+import { addChoiceToCart, updateToCart, addToCart } from "../../state/actions";
 
 function makeCalculation(items) {
   const tax = [
@@ -62,7 +62,7 @@ function makeCalculation(items) {
 }
 
 export const Cart = (props) => {
-  const { cart, addChoiceToCart } = props;
+  const { cart, addChoiceToCart, updateToCart, addToCart } = props;
   const [openedForm, setOpenedForm] = useState(false);
   const [bill, updateBill] = useState([]);
 
@@ -79,6 +79,10 @@ export const Cart = (props) => {
     let billInfo = makeCalculation(cart);
     updateBill(billInfo);
   };
+
+  useEffect(() => {
+    makeBill();
+  }, [cart]);
 
   const selectedChoices = (req) => {
     setOpenedForm(!openedForm);
@@ -116,8 +120,22 @@ export const Cart = (props) => {
             <List.Item
               key={item.name}
               actions={[
-                <IconText icon={PlusCircleOutlined} text="" />,
-                <IconText icon={MinusCircleOutlined} text="" />,
+                <IconText
+                  onClick={() => {
+                    updateToCart(item);
+                  }}
+                  icon={MinusCircleOutlined}
+                  text=""
+                />,
+                <IconText icon={ShoppingOutlined} text={item.qty}></IconText>,
+
+                <IconText
+                  onClick={() => {
+                    addToCart(item);
+                  }}
+                  icon={PlusCircleOutlined}
+                  text=""
+                />,
                 <IconText
                   icon={MenuOutlined}
                   text=""
@@ -166,6 +184,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   addChoiceToCart,
+  updateToCart,
+  addToCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
