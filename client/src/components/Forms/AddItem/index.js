@@ -4,18 +4,19 @@ import { Form, Input, Button, Select } from "antd";
 import { addItem } from "../../../state/actions";
 export const AddItem = (props) => {
   const { addItem } = props;
+  const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
 
   const onFinish = async (values) => {
     setIsLoading(true);
-
     await addItem(values);
+    form.resetFields();
 
     setIsLoading(false);
   };
   return (
     <div>
-      <Form onFinish={onFinish}>
+      <Form form={form} onFinish={onFinish}>
         <Form.Item
           name="category"
           rules={[

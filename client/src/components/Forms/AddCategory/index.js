@@ -4,18 +4,19 @@ import { connect } from "react-redux";
 import { addCategory } from "../../../state/actions";
 export const AddCategory = (props) => {
   const { addCategory } = props;
-
+  const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
 
   const onFinish = async (values) => {
     setIsLoading(true);
     await addCategory(values);
     setIsLoading(false);
+    form.resetFields();
   };
 
   return (
     <div>
-      <Form onFinish={onFinish}>
+      <Form form={form} onFinish={onFinish}>
         <Form.Item
           name="name"
           rules={[

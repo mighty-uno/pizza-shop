@@ -5,17 +5,17 @@ import { addChoice } from "../../../state/actions";
 export const AddChoice = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { addChoice } = props;
-
+  const [form] = Form.useForm();
   const onFinish = async (values) => {
     setIsLoading(true);
 
     await addChoice(values);
-
+    form.resetFields();
     setIsLoading(false);
   };
   return (
     <div>
-      <Form onFinish={onFinish}>
+      <Form form={form} onFinish={onFinish}>
         <Form.Item
           name="name"
           rules={[
