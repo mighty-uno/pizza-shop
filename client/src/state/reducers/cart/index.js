@@ -17,7 +17,7 @@ export default function (state = [], action) {
       return state;
     case UPDATE_ITEM_CART:
       fIndex = sCopy.findIndex((r) => r._id == item._id);
-      debugger;
+
       if (fIndex > -1 && sCopy[fIndex]["qty"] == 1) {
         sCopy[fIndex]["qty"]--;
         sCopy.splice(fIndex, 1);

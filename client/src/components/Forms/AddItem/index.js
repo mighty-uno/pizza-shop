@@ -55,7 +55,6 @@ export const AddItem = (props) => {
             mode="multiple"
             placeholder="select choices"
             filterOption={(input, option) => {
-              debugger;
               return (
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               );
